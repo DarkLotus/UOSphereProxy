@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Packets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using UOProxy;
 using UOProxy.Packets;
+using UOProxy.Packets.FromBoth;
 using UOProxy.Packets.FromClient;
 using UOProxy.Packets.FromServer;
 
@@ -33,10 +35,24 @@ namespace MajesticUO2016
 
             _netClient.onEventCharStartingLocation0xA9 += (e) => {
                 _netClient.SendPacket(new _0x5DLoginCharacter(e.Characters.Values.First(), e.Characters.Keys.First())); };
+
+            _netClient.onEventCharLocaleAndBody0x1B += (e) => {
+                Client.Player = new Player(e);
+            };
+            _netClient.onEventDrawObject0x78 += (e) =>
+            {
+                if (Client.Items.ContainsKey(e.Serial))
+                    Client.Items[e.Serial].Update(e);
+                else
+                    Client.Items.Add(e.Serial, new Packets.Item(e.Serial, e.GraphicID, 0, e.X, e.Y, 0, 0, e.Hue));
+            };
             _netClient.ConnectToServer("127.0.0.1", 2593);
+            byte seq = 0;
+            Thread.Sleep(5000);
             while (_netClient.Connected)
             {
                 Thread.Sleep(500);
+                //_netClient.SendPacket(new _0x73Ping(seq++));
                 lock (Logger.MsgLog)
                 {
                     foreach (var msg in Logger.MsgLog)
