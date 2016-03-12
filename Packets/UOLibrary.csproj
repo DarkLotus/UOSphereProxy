@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE910BC5-1F2F-46F9-ACAF-9A195F6D5E5A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Packets</RootNamespace>
+    <AssemblyName>Packets</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenUO.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OpenUO.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenUO.Ultima, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OpenUO.Ultima.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, PublicKeyToken=47d7877cb3620160">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\Cliloc.cs" />
+    <Compile Include="Helpers\Huffman.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\OpCodes.cs" />
+    <Compile Include="Objects\Client.cs" />
+    <Compile Include="Objects\Item.cs" />
+    <Compile Include="Objects\Mobile.cs" />
+    <Compile Include="NetClient.cs" />
+    <Compile Include="Objects\Player.cs" />
+    <Compile Include="Packets\FromBoth\0x22MoveAck.cs" />
+    <Compile Include="Packets\FromBoth\0x6CTargetCursorCommands.cs" />
+    <Compile Include="Packets\FromBoth\0x72RequestWarMode.cs" />
+    <Compile Include="Packets\FromBoth\0x73Ping.cs" />
+    <Compile Include="Packets\FromBoth\0xBDClientVersion.cs" />
+    <Compile Include="Packets\FromBoth\0xBFGeneralInfo.cs" />
+    <Compile Include="Packets\FromBoth\0xC8ClientViewRange.cs" />
+    <Compile Include="Packets\FromBoth\0xD6MegaCliloc.cs" />
+    <Compile Include="Packets\FromClient\0x02MoveRequest.cs" />
+    <Compile Include="Packets\FromClient\0x03TalkRequest.cs" />
+    <Compile Include="Packets\FromClient\0x05RequestAttack.cs" />
+    <Compile Include="Packets\FromClient\0x06DoubleClick.cs" />
+    <Compile Include="Packets\FromClient\0x07PickUpItem.cs" />
+    <Compile Include="Packets\FromClient\0x08DropItem.cs" />
+    <Compile Include="Packets\FromClient\0x09SingleClick.cs" />
+    <Compile Include="Packets\FromClient\0x12RequestSkillUse.cs" />
+    <Compile Include="Packets\FromClient\0x34GetPlayerStatus.cs" />
+    <Compile Include="Packets\FromClient\0x5DLoginCharacter.cs" />
+    <Compile Include="Packets\FromClient\0x80LoginRequest.cs" />
+    <Compile Include="Packets\FromClient\0x91GameServerLogin.cs" />
+    <Compile Include="Packets\FromClient\0xA0SelectServer.cs" />
+    <Compile Include="Packets\FromClient\0xB1GumpMenuSelection.cs" />
+    <Compile Include="Packets\FromClient\0xECEquipMacroKR.cs" />
+    <Compile Include="Packets\FromClient\0xEFClientLoginSeed.cs" />
+    <Compile Include="Packets\FromServer\0x0BDamage.cs" />
+    <Compile Include="Packets\FromServer\0x11StatusBarInfo.cs" />
+    <Compile Include="Packets\FromServer\0x16NewHealthBarStatusUpdate.cs" />
+    <Compile Include="Packets\FromServer\0x1AObjectInfo.cs" />
+    <Compile Include="Packets\FromServer\0x1BCharLocaleBody.cs" />
+    <Compile Include="Packets\FromServer\0x1CSendSpeech.cs" />
+    <Compile Include="Packets\FromServer\0x1DDeleteObject.cs" />
+    <Compile Include="Packets\FromServer\0x20DrawGamePlayer.cs" />
+    <Compile Include="Packets\FromServer\0x21CharMoveRejection.cs" />
+    <Compile Include="Packets\FromServer\0x24DrawContainer.cs" />
+    <Compile Include="Packets\FromServer\0x25AddItemToContainer.cs" />
+    <Compile Include="Packets\FromServer\0x2DMobAttributes.cs" />
+    <Compile Include="Packets\FromServer\0x2EWornItem.cs" />
+    <Compile Include="Packets\FromServer\0x3CAddMultipleItemsToContainer.cs" />
+    <Compile Include="Packets\FromServer\0x4EPersonalLightLevel.cs" />
+    <Compile Include="Packets\FromServer\0x4FOverallLightLevel.cs" />
+    <Compile Include="Packets\FromServer\0x54PlaySoundEffect.cs" />
+    <Compile Include="Packets\FromServer\0x55LoginComplete.cs" />
+    <Compile Include="Packets\FromServer\0x72RequestWarMode.cs" />
+    <Compile Include="Packets\FromServer\0x5BTime.cs" />
+    <Compile Include="Packets\FromServer\0x6ECharacterAnimation.cs" />
+    <Compile Include="Packets\FromServer\0x77UpdatePlayer.cs" />
+    <Compile Include="Packets\FromServer\0x78DrawObject.cs" />
+    <Compile Include="Packets\FromServer\0x88OpenPaperDoll.cs" />
+    <Compile Include="Packets\FromServer\0x8CConnectToGameServer.cs" />
+    <Compile Include="Packets\FromServer\0xA1UpdateCurrentHealth.cs" />
+    <Compile Include="Packets\FromServer\0xA8GameServerList.cs" />
+    <Compile Include="Packets\FromServer\0xA9CharStartingLocation.cs" />
+    <Compile Include="Packets\FromServer\0xABGumpTextEntryDialog.cs" />
+    <Compile Include="Packets\FromServer\0xAEUnicodeSpeech.cs" />
+    <Compile Include="Packets\FromServer\0xB0SendGumpMenuDialog.cs" />
+    <Compile Include="Packets\FromServer\0xB9EnableLockedClientFeatures.cs" />
+    <Compile Include="Packets\FromServer\0xB9EnableLockedClientFeature.cs" />
+    <Compile Include="Packets\FromServer\0xBFGeneralInformation.cs" />
+    <Compile Include="Packets\FromServer\0xBCSeasonalInfo.cs" />
+    <Compile Include="Packets\FromServer\0xC1ClilocMessage.cs" />
+    <Compile Include="Packets\FromServer\0xD6MegaCliloc.cs" />
+    <Compile Include="Packets\FromServer\0xDCSERevision.cs" />
+    <Compile Include="Packets\FromServer\0xDDCompressedGump.cs" />
+    <Compile Include="Packets\FromServer\0xDEUpdateMobileStatus.cs" />
+    <Compile Include="Packets\FromServer\0xF3ObjectInfo.cs" />
+    <Compile Include="Packets\Packet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UOStream.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="OpenUO.Core.dll" />
+    <Content Include="OpenUO.Ultima.dll" />
+    <Content Include="zlib.net.dll" />
+    <Content Include="zlib32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
