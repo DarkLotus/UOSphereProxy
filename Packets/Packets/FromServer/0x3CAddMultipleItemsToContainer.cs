@@ -21,7 +21,7 @@ namespace UOProxy.Packets.FromServer
             while (Data.Position + 4 < Data.Length)
             {
                 int Serial = Data.ReadInt();
-                short GraphicID = Data.ReadShort();
+                ushort GraphicID = (ushort)Data.ReadShort();
                 byte OffSetGraphicID = Data.ReadBit(); // Could be unknown
                 short Amount = Data.ReadShort();
                 short X = Data.ReadShort();

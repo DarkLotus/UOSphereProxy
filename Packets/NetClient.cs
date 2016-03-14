@@ -45,6 +45,12 @@ namespace Packets
         public event DeleteObjectEventHandler _0x1DDeleteObject;
         public delegate void DeleteObjectEventHandler(_0x1DDeleteObject e);
 
+        public event DrawContainerEventHandler onEventDrawContainer0x24;
+        public delegate void DrawContainerEventHandler(_0x24DrawContainer e);
+
+        public event AdditemToContainerEventHandler onEventAdditemToContainer0x25;
+        public delegate void AdditemToContainerEventHandler(_0x25AddItemToContainer e);
+
         public event MobAttributeEventHandler _0x2DMobAttributes;
         public delegate void MobAttributeEventHandler(_0x2DMobAttributes e);
 
@@ -121,11 +127,13 @@ namespace Packets
             Handlers.Add(0x1D, new Tuple<Type, Delegate>(typeof(_0x1DDeleteObject), _0x1DDeleteObject));
             Handlers.Add(0x20, new Tuple<Type, Delegate>(typeof(_0x20DrawGamePlayer), null));
             Handlers.Add(0x21, new Tuple<Type, Delegate>(typeof(_0x21CharMoveRejection), null));
-            Handlers.Add(0x24, new Tuple<Type, Delegate>(typeof(_0x24DrawContainer), null));
-            Handlers.Add(0x25, new Tuple<Type, Delegate>(typeof(_0x25AddItemToContainer), null));
+            Handlers.Add(0x24, new Tuple<Type, Delegate>(typeof(_0x24DrawContainer), onEventDrawContainer0x24));
+            Handlers.Add(0x25, new Tuple<Type, Delegate>(typeof(_0x25AddItemToContainer), onEventAdditemToContainer0x25));
             Handlers.Add(0x2D, new Tuple<Type, Delegate>(typeof(_0x2DMobAttributes), _0x2DMobAttributes));
             Handlers.Add(0x2E, new Tuple<Type, Delegate>(typeof(_0x2EWornItem), null));
+            Handlers.Add(0x54, new Tuple<Type, Delegate>(typeof(_0x54PlaySoundEffect), null));
             Handlers.Add(0x55, new Tuple<Type, Delegate>(typeof(_0x55LoginComplete), onEventLoginComplete0x55));
+            Handlers.Add(0x6E, new Tuple<Type, Delegate>(typeof(_0x6ECharacterAnimation), null));
             Handlers.Add(0x72, new Tuple<Type, Delegate>(typeof(_0x72RequestWarMode), onEventRequestWarMode0x72));
             Handlers.Add(0x77, new Tuple<Type, Delegate>(typeof(_0x77UpdatePlayer), onEventUpdatePlayer0x77));
             Handlers.Add(0x78, new Tuple<Type, Delegate>(typeof(_0x78DrawObject), onEventDrawObject0x78));
@@ -180,7 +188,7 @@ namespace Packets
                     {
                         byte[] destTrimmed = new byte[destSize];
                         Array.Copy(dest, 0, destTrimmed, 0, destSize);
-                        Logger.Log("From Server DeHuffed: " + BitConverter.ToString(destTrimmed, 0, destSize));
+                       // Logger.Log("From Server DeHuffed: " + BitConverter.ToString(destTrimmed, 0, destSize));
                         HandlePacketFromServer(destTrimmed);
                         bytesRead = data.Length;
                     }
@@ -193,7 +201,7 @@ namespace Packets
                 else
                 {
                     HandlePacketFromServer(data);
-                    Logger.Log("From Server NoHuff: " + BitConverter.ToString(data, 0, bytesRead));
+                   // Logger.Log("From Server NoHuff: " + BitConverter.ToString(data, 0, bytesRead));
 
                     // if (TcpClients.client != null)
                     //    TcpClients.client.GetStream().Write(data, 0, bytesRead);

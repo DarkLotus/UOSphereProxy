@@ -10,7 +10,7 @@ namespace UOProxy.Packets.FromServer
     public class _0x25AddItemToContainer : Packet
     {
         public int Serial;
-        public short GraphicID;
+        public ushort GraphicID;
         byte OffSetGraphicID; // unknown??
         public short Amount, X, Y;
         public byte Index;
@@ -21,7 +21,7 @@ namespace UOProxy.Packets.FromServer
             : base(Data)
         {
             Serial = Data.ReadInt();
-            GraphicID = Data.ReadShort();
+            GraphicID = (ushort)Data.ReadShort();
             OffSetGraphicID = Data.ReadBit();
             Amount = Data.ReadShort();
             X = Data.ReadShort();

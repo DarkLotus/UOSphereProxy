@@ -10,7 +10,7 @@ namespace UOProxy.Packets.FromServer
     {
         short _length;
         public int Serial;
-        public short GraphicID;
+        public ushort GraphicID;
         public short X,Y;
         public byte Z, Direction;
         public short Hue;
@@ -20,8 +20,9 @@ namespace UOProxy.Packets.FromServer
         {
             
             this.Data = Data;
+            this._length = Data.ReadShort();
             this.Serial = Data.ReadInt();
-            this.GraphicID = Data.ReadShort();
+            this.GraphicID = (ushort)Data.ReadShort();
             this.X = Data.ReadShort();
             this.Y = Data.ReadShort();
             this.Z = Data.ReadBit();

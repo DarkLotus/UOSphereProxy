@@ -10,9 +10,9 @@ namespace Packets
 {
     public class Client
     {
-        public static Player Player;
+        public Player Player;
         public static Dictionary<int,Item> Items = new Dictionary<int, Item>();
-        public static List<Mobile> Mobiles = new List<Mobile>();
+        public static Dictionary<int, Mobile> Mobiles = new Dictionary<int, Mobile>();
         public Client(NetClient _netClient,string user, string pass)
         {
             _netClient.onConnected += (s, e) => {
@@ -34,14 +34,14 @@ namespace Packets
             };
 
             _netClient.onEventCharLocaleAndBody0x1B += (e) => {
-                Client.Player = new Player(e);
+                Player = new Player(e);
             };
             _netClient.onEventDrawObject0x78 += (e) =>
             {
-                if (Client.Items.ContainsKey(e.Serial))
-                    Client.Items[e.Serial].Update(e);
+                if (Client.Mobiles.ContainsKey(e.Serial))
+                    Client.Mobiles[e.Serial].Update(e);
                 else
-                    Client.Items.Add(e.Serial, new Packets.Item(e.Serial, e.GraphicID, 0, e.X, e.Y, 0, 0, e.Hue));
+                    Client.Mobiles.Add(e.Serial, new Mobile(e));
             };
         }
     }
