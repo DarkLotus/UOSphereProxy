@@ -42,7 +42,7 @@ namespace UOProxy
         public delegate void ConnectToGameServerEventHandler(_0x8CConnectToGameServer e);
 
         public event SendGumpMenuDialogEventHandler _0xB0SendGumpMenuDialog;
-        public delegate void SendGumpMenuDialogEventHandler(_0xB0SendGumpMenuDialog e);
+        public delegate void SendGumpMenuDialogEventHandler(_0xB0SendGumpMenuDialog e, TcpClient serverCon);
 
         public event CompressedGumpEventHandler _0xDDCompressedGump;
         public delegate void CompressedGumpEventHandler(_0xDDCompressedGump e);
@@ -115,6 +115,7 @@ namespace UOProxy
                     if (member != null)
                     {
                         Logger.Log(member.ToString());
+                        
                         member.GetType().GetMethod("Invoke").Invoke(member, new object[] { packet });
                     }
                     else

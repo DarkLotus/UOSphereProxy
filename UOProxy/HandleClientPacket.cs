@@ -12,7 +12,7 @@ namespace UOProxy
     public partial class UOProxy
     {
         public event GumpMenuSelectionEventHandler _0xB1GumpMenuSelection;
-        public delegate void GumpMenuSelectionEventHandler(Packets.FromClient._0xB1GumpMenuSelection e,TcpClient serverCon);
+        public delegate void GumpMenuSelectionEventHandler(Packets.FromClient._0xB1GumpMenuSelection e);
 
         public event TalkRequestEventHandler _0x03TalkRequest;
         public delegate void TalkRequestEventHandler(Packets.FromClient._0x03TalkRequest e);
@@ -28,7 +28,7 @@ namespace UOProxy
                 case OpCode.CMSG_GumpMenuSelection:
                     var p = new Packets.FromClient._0xB1GumpMenuSelection(Data);
                     if (_0xB1GumpMenuSelection != null)
-                        _0xB1GumpMenuSelection((Packets.FromClient._0xB1GumpMenuSelection)p,server);
+                        _0xB1GumpMenuSelection((Packets.FromClient._0xB1GumpMenuSelection)p);
                     break;
                 case OpCode.CMSG_TalkRequest:
                     var ptalk = new Packets.FromClient._0x03TalkRequest(Data);
@@ -44,6 +44,11 @@ namespace UOProxy
                     break;
                 case OpCode.CMSG_RequestAttack:
                     var p05 = new Packets.FromClient._0x05RequestAttack(Data);
+                    if(_BlockedTargets.Contains(p05.ID))
+                    {
+                        Console.WriteLine("Blocking attack on Mobile: " + p05.ID);
+                        return false;
+                    }
                     if (_0x05AttackRequest != null)
                         return _0x05AttackRequest((_0x05RequestAttack)p05);
                     break;
@@ -53,21 +58,30 @@ namespace UOProxy
         }
 
         public Dictionary<int,int> GumpsWaitedFor = new Dictionary<int, int>();
+        private List<int> _BlockedTargets = new List<int>();
+
         private void HandleProxyCommand(_0x03TalkRequest ptalk)
         {
-            var commands = ptalk.Message.Remove(0,1).Split(new char[] { '#' });
+            var commands = ptalk.Message.Remove(0,1).Split(new char[] { '~' });
             if(commands[0].Equals("recall"))
             {
                 int gumpid = int.Parse(commands[1]);
                 int Clicked = int.Parse(commands[2]);
                 GumpsWaitedFor.Add(gumpid, Clicked);
-                this._0xB0SendGumpMenuDialog += UOProxy__0xB0SendGumpMenuDialog;
+               
+            }
+            if (commands[0].Equals("blockattack"))
+            {
+                int id = int.Parse(commands[1]);
+                _BlockedTargets.Add(id);
+            }
+            if (commands[0].Equals("clearblockattack"))
+            {
+
+                _BlockedTargets.Clear();
             }
         }
 
-        private void UOProxy__0xB0SendGumpMenuDialog(_0xB0SendGumpMenuDialog e)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

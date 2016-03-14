@@ -22,7 +22,7 @@ namespace UOProxy
             {
                 SetupHandlers();
                 
-                tcpListener = new TcpListener(IPAddress.Any, port);
+                                tcpListener = new TcpListener(IPAddress.Any, port);
                 tcpListener.Start();
                 tcpListener.BeginAcceptTcpClient(new AsyncCallback(this.AcceptClientConnection), tcpListener);
                 //var client = tcpListener.AcceptTcpClient();
@@ -47,12 +47,21 @@ namespace UOProxy
             
         }
 
+        TcpClient Server;
 
+        public bool SendPacket(Packets.Packet p)
+        {
+            if(Server.Connected)
+            {
+                Server.GetStream().Write(p.PacketData, 0, p.PacketData.Length);
+            }
+            return true;
+        }
         private void HandleClientCom(object Client)
         {
             TcpClient client = (TcpClient)Client;
             NetworkStream ClientStream = client.GetStream();
-            TcpClient Server = ConnectToServer("192.95.29.83", 2593, client);
+            Server = ConnectToServer("192.95.29.83", 2593, client);
             byte[] data = new byte[4096];
             while (client.Connected)
             {
@@ -64,7 +73,7 @@ namespace UOProxy
                 int bytesRead = ClientStream.Read(data, 0, client.Available);
                 bool forwardPacket = true;
                 if (data[0] != 0xBF)
-                    forwardPacket = HandleClientPacket(data, bytesRead);
+                    forwardPacket = HandleClientPacket(data, bytesRead,Server);
                 //Logger.Log("From Client: " + BitConverter.ToString(data, 0, bytesRead));
                 //Todo parse packet stream, ability to filter certain packet.
                 if (forwardPacket)

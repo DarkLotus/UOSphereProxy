@@ -49,37 +49,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packets\FromClient\0x03TalkRequest.cs" />
     <Compile Include="UOProxy.cs" />
     <Compile Include="HandleClientPacket.cs" />
     <Compile Include="HandleServerPackets.cs" />
-    <Compile Include="Helpers\Cliloc.cs" />
-    <Compile Include="Helpers\Huffman.cs" />
-    <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Packets\FromClient\0x02MoveRequest.cs" />
-    <Compile Include="Packets\FromClient\0x05RequestAttack.cs" />
-    <Compile Include="Packets\FromClient\0x06DoubleClick.cs" />
-    <Compile Include="Packets\FromClient\0x07PickUpItem.cs" />
-    <Compile Include="Packets\FromClient\0xB1GumpMenuSelection.cs" />
-    <Compile Include="Packets\FromServer\0x11StatusBarInfo.cs" />
-    <Compile Include="Packets\FromServer\0x1AObjectInfo.cs" />
-    <Compile Include="Packets\FromServer\0x1CSendSpeech.cs" />
-    <Compile Include="Packets\FromServer\0x2DMobAttributes.cs" />
-    <Compile Include="Packets\FromServer\0x77UpdatePlayer.cs" />
-    <Compile Include="Packets\FromServer\0x8CConnectToGameServer.cs" />
-    <Compile Include="Packets\FromServer\0x0BDamage.cs" />
-    <Compile Include="Packets\FromServer\0x16NewHealthBarStatusUpdate.cs" />
-    <Compile Include="Packets\FromServer\0x1BCharLocaleBody.cs" />
-    <Compile Include="Packets\FromServer\0x1DDeleteObject.cs" />
-    <Compile Include="Packets\FromServer\0xD6MegaCliloc.cs" />
-    <Compile Include="Packets\FromServer\0xB0SendGumpMenuDialog.cs" />
-    <Compile Include="Packets\FromServer\0xDDCompressedGump.cs" />
-    <Compile Include="Packets\Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UOStream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Packets\FromBoth\" />
+    <ProjectReference Include="..\Packets\UOLibrary.csproj">
+      <Project>{be910bc5-1f2f-46f9-acaf-9a195f6d5e5a}</Project>
+      <Name>UOLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="zlib32.dll">
